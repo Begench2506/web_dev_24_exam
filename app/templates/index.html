@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% from 'pagination.html' import pagination %}
+
+{% block content %}
+<div class="moto">
+    <h1 class="moto1">ElectroLib</h1>
+    <h3 class="moto3">Ваша цифровая библиотека знаний</h3>
+</div>
+
+<div class="about" id="about">
+    <h1 class="about1">О сервисе ElectroLib</h1>
+    <h3 class="about3"><b>ElectroLib</b> - это современная цифровая библиотека, созданная с целью предоставить доступ к
+        огромному множеству книг и ресурсов для чтения на любой вкус. Наша миссия - сделать чтение легким,
+        увлекательным и доступным для каждого. Мы стремимся к тому, чтобы каждый человек мог наслаждаться
+        литературой
+        в любое время и в любом месте, вне зависимости от устройства. Присоединяйтесь к ElectroLib и откройте для
+        себя
+        мир знаний, который ожидает вас!</h3>
+</div>
+
+<div class="books" id="books">
+    <h1 class="about1">Каталог ElectroLib</h1>
+    {% if current_user.is_authenticated and current_user.can('delete') %}
+    <a class="btn btn-success my-2" href="{{ url_for('book.new') }}">Добавить книгу</a>
+    {% endif %}
+
+    <div class="container">
+        {% if flag %}
+        <div class="h-100 text-center d-flex p-3">
+            <div class="m-auto">
+                <div class="row">
+                    {% for book in books %}
+                    <div class="col-md-12 col-lg-6 mb-3">
+                        <div class="card h-100">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="{{ book.get_img() }}" class="img-fluid rounded-start"
+                                        alt="{{ book.title }}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body text-start">
+                                        <h5 class="card-title mt-3 mb-4"><b>{{ book.title }}</b></h5>
+                                        <p class="card-text mt-4">
+                                            <strong>Жанр:</strong>
+                                            {% for genre in book_genre %}
+                                            {% if genre.books_id == book.id %}{{ genre.genre.genre_name }}{% endif %}
+                                            {% endfor %}
+                                        </p>
+                                        <p class="card-text"><strong>Дата издания:</strong> {{ book.year }}</p>
+                                        <p class="card-text"><strong>Средняя оценка:</strong> {{ book.rating }}</p>
+                                        <p class="card-text mb-4"><strong>Количество рецензий:</strong> {{
+                                            book.reviews|length }}
+                                        </p>
+                                        <div class="book_btn vertical-align-center">
+                                            <a class="btn btn-outline-success"
+                                                href="{{ url_for('book.show', book_id=book.id) }}">Подробнее</a>
+                                            {% if current_user.is_authenticated %}
+                                            {% if current_user.can('edit') %}
+                                            <a class="btn btn-outline-secondary" href="{{ url_for('book.edit', book_id=book.id) }}" class="ms-3"> Редактировать</a>
+                                            {% endif %}
+                                            {% if current_user.can('delete') %}
+
+                                            <button type="button" class="btn btn-outline-danger"
+                                                data-url="{{ url_for('book.delete', book_id=book.id) }}"
+                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                data-title="{{ book.title }}">
+                                                Удалить
+                                            </button>
+                                            <!-- <a href="#" class="ms-2"
+                                                data-url="{{ url_for('book.delete', book_id=book.id) }}"
+                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                data-title="{{ book.title }}">
+                                                <img src="{{ url_for('static', filename='img/trash.png') }}"
+                                                    alt="Удаление" width="35">
+                                            </a> -->
+
+                                            {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="d-flex justify-content-center align-items-center mt-2 mb-5">
+                    {{ pagination(page, page_count, request.endpoint) }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if not flag %}
+        <h3 class="title my-3 font-weight-bold text-center">Ничего не найдено</h3>
+        {% endif %}
+    </div>
+
+</div>
+
+{% if current_user.is_authenticated %}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Подтвердите действие</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center mt-3">
+                <p>Удаление книги: "<span class="delete-title"></span>"</p>
+                <form action="" class="d-none" method="POST">
+                    <input type="submit" id="submit-delete">
+                </form>
+            </div>
+            <div class="modal-footer d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-outline-secondary me-3" data-bs-dismiss="modal">Отмена</button>
+                <label for="submit-delete" class="btn btn-outline-danger ms-3">Удалить</label>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+
+<script src="{{ url_for('static', filename='delete.js')}}"></script>
+{% endblock %}
