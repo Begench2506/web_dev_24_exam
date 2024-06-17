@@ -15,10 +15,10 @@
                 <img src="{{url_for('static', filename='img/user_icon.png')}}" height="70">
             </div>
             <div class="col-6">
-                <h5>Название книги: {{ title }}</h5>
-                <h5 class="mb-3"><b>Пользователь: </b> {{ review.get_user() }} </h5>
-                <p><b>Оценка: </b> {{ review.rating }} </p>
-                <p> <i>{{ review.text | safe }}</i> </p>
+                <h5 class="mb-3"><b>Название книги:</b> {{ review.book_title }}</h5>
+                <p><b>Пользователь: </b> {{ review.get_user() }} </p>
+                <!-- <p><b>Оценка: </b> {{ review.rating }} </p>
+                <p> <i>{{ review.text | safe }}</i> </p> -->
             </div>
             <div class="col-3 d-flex justify-content-center align-items-center">
                 <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#reviewModal{{ review.id }}">
@@ -38,8 +38,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="text-start mx-3 mt-3">
-                <h5 class="mb-3"><b>Пользователь: </b> {{ review.get_user() }} </h5>
-                <h5><b>Оценка: </b> {{ review.rating }} </h5>
+                <h5 class="mb-3"><b>Название книги:</b> {{ review.book_title }}</h5>
+                <p><b>Пользователь: </b> {{ review.get_user() }} </p>
+                <p><b>Оценка: </b> {{ review.rating }} </p>
                 <p> <i>{{ review.text | safe }}</i> </p>
                 
             </div>

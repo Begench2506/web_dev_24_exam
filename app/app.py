@@ -89,10 +89,12 @@ def reviews():
                 'get_user': comment.get_user,
                 'rating': comment.rating,
                 'text': markdown.markdown(comment.text),
-                'status': comment.status_id
+                'status': comment.status_id,
+                'book_title': comment.book.title  # Include the book title
             })
 
     return render_template('reviews/reviews.html', reviews=markdown_comments)
+
 
 @app.route('/reviewmoderation')
 @login_required
@@ -113,7 +115,8 @@ def reviews_moder():
                 'get_user': comment.get_user,
                 'rating': comment.rating,
                 'text': markdown.markdown(comment.text),
-                'status': comment.status_id
+                'status': comment.status_id,
+                'book_title': comment.book.title
             })
 
     return render_template("reviews/moder.html", reviews=markdown_comments, page=page, page_count=page_count)

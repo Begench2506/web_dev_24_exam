@@ -48,7 +48,7 @@ class Book(db.Model):
 
     def __repr__(self):
         return '<Book: %r>' % self.title
-    
+
     def get_img(self):
         img = Cover.query.filter_by(id=self.cover_id).first()
         if img:
@@ -61,7 +61,7 @@ class Book(db.Model):
             return round((self.rating_sum / self.rating_num), 2)
         return 0
 
-    reviews = db.relationship('Review')
+    reviews = db.relationship('Review', back_populates='book')
     books_genres = db.relationship('Books_has_Genres')
     cover = db.relationship('Cover')
 
@@ -134,11 +134,10 @@ class Review(db.Model):
     rating = db.Column(db.Integer, nullable=False)
     text = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=sa.sql.func.now())
-    #status_id = db.Column(db.Integer, db.ForeignKey('statuses.id', ondelete='CASCADE'), nullable=False)
     status_id = db.Column(db.Integer, db.ForeignKey('statuses.id', ondelete='CASCADE'), nullable=False)
 
-
-
+    book = db.relationship('Book', back_populates='reviews')
+    
     def __repr__(self):
         return f'<Reviews: {self.user_id} {self.created_at}>'
     

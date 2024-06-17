@@ -16,7 +16,8 @@
                 </div>
                 <div class="col-9">
         
-                    <h5 class="mb-3"><b>Пользователь: </b> {{ review.get_user() }} </h5>
+                    <h5 class="mb-3"><b>Книга: </b> {{ review.book_title }}</h5>
+                    <!-- <p><b>Пользователь: </b> {{ review.get_user() }} </p> -->
                     <p><b>Оценка: </b> {{ review.rating }} </p>
                     <p> <i>{{ review.text | safe }}</i> </p>
         
