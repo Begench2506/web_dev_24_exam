@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% from 'pagination.html' import pagination %}
+{% block content %}
+
+<div class="title text-center">
+    <p class="mt-5 mb-3" style="font-size: 40px; color: black;">Рецензии на рассмотрении</p>
+</div>
+
+{% if reviews %}
+{% for review in reviews %}
+<div class="container-fluid">
+    <div class="users_rev container d-flex flex-column rounded-3 p-3 my-3" style="background-color: white; width: 60%;">
+        <div class="row">
+            <div class="col-3 d-flex justify-content-center align-items-center">
+                <img src="{{url_for('static', filename='img/user_icon.png')}}" height="70">
+            </div>
+            <div class="col-6">
+                <h5 class="mb-3"><b>Название книги:</b> {{ review.book_title }}</h5>
+                <p><b>Пользователь: </b> {{ review.get_user() }} </p>
+                <!-- <p><b>Оценка: </b> {{ review.rating }} </p>
+                <p> <i>{{ review.text | safe }}</i> </p> -->
+            </div>
+            <div class="col-3 d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#reviewModal{{ review.id }}">
+                    Просмотр
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="reviewModal{{ review.id }}" tabindex="-1" aria-labelledby="reviewModalLabel{{ review.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel{{ review.id }}">Модерация рецензии</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="text-start mx-3 mt-3">
+                <h5 class="mb-3"><b>Название книги:</b> {{ review.book_title }}</h5>
+                <p><b>Пользователь: </b> {{ review.get_user() }} </p>
+                <p><b>Оценка: </b> {{ review.rating }} </p>
+                <p> <i>{{ review.text | safe }}</i> </p>
+                
+            </div>
+            <div class="modal-footer d-flex justify-content-center align-items-center">
+                <a class="btn btn-outline-danger me-3" href="{{ url_for('reject', review_id=review.id) }}">Отклонить</a>
+                <a class="btn btn-outline-success ms-3" href="{{ url_for('aprove', review_id=review.id) }}">Одобрить</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
+
+<div class="my-5">
+    {{ pagination(page, page_count, request.endpoint) }}
+</div>
+
+{% endblock %}
