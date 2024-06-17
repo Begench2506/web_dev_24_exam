@@ -1,0 +1,323 @@
+.background-preview {
+    border: 3px dashed grey;
+    flex-grow: 1;
+}
+
+.title-area {
+    background-color: black;
+    background-image: url('images/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+    font-size: 1.5rem;
+    min-height: calc(75vh);
+}
+
+.courses-list .row:hover {
+    cursor: pointer;
+    border: 1px solid black !important;
+}
+
+.course-logo {
+    min-width: 170px;
+    width: 100%;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+
+.body {
+    background-color: #eee;
+    font-family: "Ruda", sans-serif;
+}
+
+header,
+main,
+footer {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: grey;
+    transition: linear 0.3s;
+}
+
+.nav-link:hover {
+    color: #198754;
+    transition: linear 0.3s;
+}
+
+.moto {
+    background-image: url('../img/back.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: auto;
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.moto1 {
+    font-size: 80px;
+    font-weight: 400;
+    color: black;
+    background-color: #fff;
+    border-radius: 1vh;
+    padding: 1vh;
+}
+
+.moto3 {
+    font-size: 35px;
+    font-weight: 100;
+    color: black;
+    background-color: #fff;
+    border-radius: 1vh;
+    padding: 1vh;
+}
+
+.about {
+    margin-top: 7vh;
+    margin-bottom: 3vh;
+    padding: 0 35vh 0 35vh;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about1 {
+    font-size: 40px;
+}
+
+.about3 {
+    margin-top: 3vh;
+    font-size: 24px;
+    font-weight: 350;
+}
+
+.books {
+    margin-top: 7vh;
+    margin-bottom: 0;
+    padding: 0 20vh 0 20vh;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    color: #fff;
+    background-color: #249c64;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.fotext {
+    font-size: 20px;
+    font-weight: 200;
+}
+
+/* Стили для общего контейнера пагинации */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+/* Стили для элемента списка */
+.pagination .page-item {
+    margin: 0 2px;
+}
+
+/* Стили для ссылки */
+.pagination .page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #198754;
+    background-color: #fff;
+    border-color: #6c757d;
+    border-radius: 0.3vh;
+    text-decoration: none;
+}
+
+/* Стили для активного элемента */
+.pagination .page-item.active .page-link {
+    border-radius: 0.3vh;
+    z-index: 1;
+    color: #fff;
+    background-color: #198754;
+    border-color: transparent;
+}
+
+/* Стили для отключенного элемента */
+.pagination .page-item.disabled .page-link {
+    color: #fff;
+    pointer-events: none;
+    background-color: #6c757d;
+    border-color: transparent;
+    border-radius: 0.3vh;
+}
+
+.pagination .page-link:hover {
+    color: #198754;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.line {
+    background-color: #198754;
+    width: 100%;
+    height: 0.3vh;
+}
+
+/* .pagination .page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.pagination .page-item:last-child .page-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+} */
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main{
+   flex: 1 1 auto; 
+}
+
+
+.obertka{
+    background-image: url('../img/back.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.modal_auth {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.promezh{
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5vh;
+    text-align: center;
+    width: 50vh;
+}
+
+.auth_title {
+    font-size: 4vh;
+    margin-bottom: 1rem;
+}
+
+.auth_back, .auth_enter {
+    font-size: 2vh;
+    border: none;
+    border-radius: 0.6vh;
+    color: white;
+    height: 3.5vh;
+    width: 10vh;
+    transition: linear 0.3s;
+}
+
+.auth_back {
+    background-color: #adb5bd;
+}
+
+.auth_back:hover {
+    background-color: #495057;
+}
+
+.auth_enter {
+    background-color: #198754;
+}
+
+.auth_enter:hover {
+    background-color: #0F5132;
+}
+
+.auth_log_label, .auth_pass_label {
+    font-size: 2vh;
+}
+
+.auth_log, .auth_pass {
+    text-align: center;
+    border: 0.2vh solid #adb5bd;
+    border-radius: 0.6vh;
+    background-color: rgb(240, 240, 240);
+    height: 3.5vh;
+    width: 20vh;
+    margin-top: 0.5rem;
+}
+
+
+.form-check-input {
+    margin-right: 0.8vh; /* Уменьшает расстояние между чекбоксом и меткой */
+}
+
+.buttons {
+    margin-top: 1.5rem;
+}
+
+/* Скрыть стандартный чекбокс */
+.custom-checkbox {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+/* Стилизованный чекбокс */
+.custom-checkbox + .form-check-label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #198754; /* Зеленая рамка */
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* Стилизованный чекбокс, когда выбран */
+.custom-checkbox:checked + .form-check-label::before {
+    background-color: #ffffff; /* Белый фон, чтобы изображение было видно */
+    background-image: url('../img/tick_icon.png'); /* Путь к вашему изображению галочки */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid #198754; /* Зеленая рамка */
+}

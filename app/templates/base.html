@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/logo.png')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ruda:wght@400..900&display=swap" rel="stylesheet">
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <script defer src="{{ url_for('static', filename='main.js') }}"></script>
+    <title>ElectroLib</title>
+</head>
+
+<body class="body">
+    <div class="wrapper">
+        <header class="sticky-top">
+            <nav class="navbar navbar-expand-lg" style="background-color: #fff;">
+                <div class="container-fluid">
+                    <a class="navbar-brand ms-5 me-5" href="{{url_for('index')}}">
+                        <img src="{{url_for('static', filename='img/logo.png')}}" alt="Bootstrap" width="24" height="24">
+                        ElectroLib
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link me-3" href="#about">О нас</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-3" href="#books">Книги</a>
+                            </li>
+    
+                            {% if current_user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link me-3" href="{{ url_for('reviews') }}">Мои рецензии</a>
+                            </li>
+                            {% if current_user.can('edit') %}
+                            <li class="nav-item">
+                                <a class="nav-link me-3" href="{{ url_for('reviews_moder') }}">Модерация
+                                    рецензий</a>
+                            </li>
+                            
+                            {% endif %}
+                            {% endif %}
+                        </ul>
+                        {% if current_user.is_authenticated %}
+                        <div class="col mt-3 me-3">
+                            <p class="text-end">
+                                {{ current_user.last_name }}
+                                {{ current_user.first_name }}
+                                {{ current_user.middle_name }}
+                            </p>
+                        </div>
+                        <a href="{{ url_for('auth.logout') }}"><button type="button" class="btn btn-outline-success me-5">
+                                Выйти
+                            </button></a>
+                        {% else %}
+                        <a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-outline-success me-5">
+                                Войти
+                            </button></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+            <div class="line"></div>
+        </header>
+        <div class="alerts-area">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, msg in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show m-0 rounded-0" role="alert">
+                {{ msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endwith %}
+        </div>
+    
+        <main class="main">
+            {% block content %}
+            {% endblock %}
+        </main>
+    
+        <footer class="fo_index mb-0">
+            <div class="line"></div>
+            <h3 class="fotext mt-2">&copy; ElectroLib | Овезов Бегенч | 221-351</h3>
+        </footer>
+    </div>
+
+    
+</body>
+
+</html>
