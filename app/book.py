@@ -142,6 +142,9 @@ def edit(book_id):
 @login_required
 def review(book_id):
     book = Book.query.get(book_id)
+    user_id = current_user.get_id()
+    existing_review = Review.query.filter_by(book_id=book_id, user_id=user_id).first()
+
     if request.method == 'POST':
         text = request.form.get('review')
         mark = int(request.form.get('mark'))
@@ -154,9 +157,10 @@ def review(book_id):
         flash(f'Отзыв был успешно добавлен на модерацию!', 'success')
         return redirect(url_for('book.show', book_id=book.id))
     if request.method == 'GET':
-        return render_template('book/review.html', book=book)
+        if existing_review:
+            flash('Вы уже оставляли отзыв на эту книгу', 'danger')
+            return redirect(url_for('book.show', book_id=book.id))
+        else:
+            return render_template('book/review.html', book=book)
 
     
-
-
-        
